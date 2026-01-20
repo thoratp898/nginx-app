@@ -25,7 +25,7 @@ jobs:
     - name: Deploy to k3s
       run: |
         ssh ubuntu@${{ secrets.SERVER_IP }} << 'EOF'
-        cd /root/nginx-app
+        cd /home/ubuntu/nginx-app
         kubectl apply -f .
         EOF
 

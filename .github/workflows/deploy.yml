@@ -22,9 +22,9 @@ jobs:
       run: |
         ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
 
-    - name: Deploy
+    - name: Deploy to k3s
       run: |
-        ssh root@${{ secrets.SERVER_IP }} << 'EOF'
+        ssh ubuntu@${{ secrets.SERVER_IP }} << 'EOF'
         cd /root/nginx-app
         kubectl apply -f .
         EOF

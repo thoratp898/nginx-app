@@ -1,0 +1,29 @@
+name: Deploy to k3s
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+
+    - name: Deploy to k3s
+      run: |
+        ssh root@${{ secrets.SERVER_IP }} << 'EOF'
+        kubectl apply -f configmap.yml
+        kubectl apply -f deployment.yml
+        kubectl apply -f service.yml
+        EOF

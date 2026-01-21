@@ -6,6 +6,10 @@ data:
   index.html: |
     <html>
       <body>
+<<<<<<< HEAD
         <h1>Hello vrushab</h1>
+=======
+        <h1>Hello Pramod</h1>
+>>>>>>> 76c3175f9b07a7b8f3051982d67fa515ffc7a9ac
       </body>
     </html>
